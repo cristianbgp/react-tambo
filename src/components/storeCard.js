@@ -20,7 +20,9 @@ function StoreCard({ store }) {
           ? `${parseInt(store.distance)}m`
           : `${(store.distance / 1000).toFixed(2)}km`}
       </Text>
-      <Text css={{ textTransform: "capitalize" }}>{store.address}</Text>
+      <Text css={{ textTransform: "capitalize" }}>
+        {store.address.toLowerCase()}
+      </Text>
       <div
         css={{
           display: "flex",
