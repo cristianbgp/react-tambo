@@ -4,6 +4,7 @@ import { render } from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { Global, jsx } from "@emotion/core";
 import Home from "./views/home";
+import ReactGA from "react-ga";
 
 function App() {
   return (
@@ -28,4 +29,6 @@ console.log("by @cristianbgp 🤓");
 const rootElement = document.getElementById("root");
 render(<App />, rootElement);
 
-serviceWorker.unregister();
+ReactGA.initialize("UA-139257083-3");
+ReactGA.pageview(window.location.pathname + window.location.search);
+serviceWorker.register();
