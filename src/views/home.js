@@ -69,7 +69,7 @@ function Home() {
     <div css={styleContainer}>
       <Title css={{ marginTop: "0.7em", color: "#A74A93" }}>Tambo+</Title>
       <Title>cerca</Title>
-      <labeL
+      <label
         htmlFor="filter-stores"
         css={{ fontSize: "0.7em", textAlign: "center", marginTop: "1em" }}
       >
@@ -86,7 +86,7 @@ function Home() {
             <option value="atm">ATM</option>
           </Select>
         </div>
-      </labeL>
+      </label>
       <div css={{ maxWidth: "800px" }}>
         {stores.filter(filterBy).map(store => {
           return <StoreCard key={store.id} store={store} />;
