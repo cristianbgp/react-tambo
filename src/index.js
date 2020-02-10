@@ -8,7 +8,7 @@ import ReactGA from "react-ga";
 
 function App() {
   return (
-    <>
+    <React.Fragment>
       <Global
         styles={{
           "body, h1, p": {
@@ -20,7 +20,7 @@ function App() {
         }}
       />
       <Home />
-    </>
+    </React.Fragment>
   );
 }
 

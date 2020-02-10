@@ -1,12 +1,10 @@
 /** @jsx jsx */
 import React from "react";
-import { getStores, getStoresByDistance } from "../services/stores";
 import { jsx } from "@emotion/core";
-import { Title, Select } from "../components/ui";
-import StoreCard from "../components/storeCard";
+import { Title, Select, LoaderIcon } from "../components/ui";
+import StoresList from "../components/storesList";
 
 function Home() {
-  const [stores, setStores] = React.useState([]);
   const [position, setPosition] = React.useState({ latitude: 0, longitude: 0 });
   const [selectedFilter, setSelectedFilter] = React.useState("");
 
@@ -19,22 +17,12 @@ function Home() {
     };
   }, [setPosition]);
 
-  React.useEffect(() => {
-    getStoresByDistance([position.latitude, position.longitude]).then(
-      stores => {
-        setStores(stores);
-      }
-    );
-  }, [setStores, position]);
-
   function handleChangeFilter(e) {
     setSelectedFilter(e.target.value);
-    console.log(e.target.value);
   }
 
   function filterBy(store) {
     if (selectedFilter !== "") {
-      console.log(store);
       return store[selectedFilter];
     } else {
       return true;
@@ -42,6 +30,7 @@ function Home() {
   }
 
   const styleContainer = {
+    minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -87,11 +76,24 @@ function Home() {
           </Select>
         </div>
       </label>
-      <div css={{ maxWidth: "800px" }}>
-        {stores.filter(filterBy).map(store => {
-          return <StoreCard key={store.id} store={store} />;
-        })}
-      </div>
+      <React.Suspense
+        fallback={
+          <div
+            css={{
+              height: 100,
+              paddingLeft: 50,
+              svg: { height: "100%", circle: { fill: "#A74A93" } }
+            }}
+          >
+            <LoaderIcon />
+          </div>
+        }
+      >
+        <StoresList
+          filterBy={filterBy}
+          currentLocation={[position.latitude, position.longitude]}
+        />
+      </React.Suspense>
     </div>
   );
 }

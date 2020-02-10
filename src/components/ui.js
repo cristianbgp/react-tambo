@@ -283,4 +283,56 @@ function MapPin(props) {
   );
 }
 
-export { Card, Text, Title, Line, Select, ATMIcon, AllDayIcon, MapPin };
+function LoaderIcon(props) {
+  return (
+    <svg
+      id="L4"
+      x="0px"
+      y="0px"
+      viewBox="0 0 100 100"
+      enableBackground="new 0 0 0 0"
+      xmlSpace="preserve"
+      {...props}
+    >
+      <circle fill="#fff" stroke="none" cx={6} cy={50} r={6}>
+        <animate
+          attributeName="opacity"
+          dur="1s"
+          values="0;1;0"
+          repeatCount="indefinite"
+          begin={0.1}
+        />
+      </circle>
+      <circle fill="#fff" stroke="none" cx={26} cy={50} r={6}>
+        <animate
+          attributeName="opacity"
+          dur="1s"
+          values="0;1;0"
+          repeatCount="indefinite"
+          begin={0.2}
+        />
+      </circle>
+      <circle fill="#fff" stroke="none" cx={46} cy={50} r={6}>
+        <animate
+          attributeName="opacity"
+          dur="1s"
+          values="0;1;0"
+          repeatCount="indefinite"
+          begin={0.3}
+        />
+      </circle>
+    </svg>
+  );
+}
+
+export {
+  Card,
+  Text,
+  Title,
+  Line,
+  Select,
+  ATMIcon,
+  AllDayIcon,
+  MapPin,
+  LoaderIcon
+};
