@@ -10,12 +10,22 @@ function Home() {
 
   React.useEffect(() => {
     const watchID = navigator.geolocation.watchPosition(pos => {
-      setPosition(pos.coords);
+      if (!tooClose(position, pos.coords)){
+        return setPosition(pos.coords)
+      }
     });
     return () => {
       navigator.geolocation.clearWatch(watchID);
     };
-  }, [setPosition]);
+  }, [setPosition, position]);
+
+  function tooClose(oldPosition, newPosition) {
+    const diffLatitude = Math.abs(oldPosition.latitude - newPosition.latitude);
+    const diffLongitude = Math.abs(
+      oldPosition.longitude - newPosition.longitude
+    );
+    return diffLatitude < 0.0006 && diffLongitude < 0.0006 ? true : false;
+  }
 
   function handleChangeFilter(e) {
     setSelectedFilter(e.target.value);
